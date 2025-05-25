@@ -14,27 +14,27 @@ def compute_metrics(data: dict) -> dict:
     died     = perf.get("death_count", 0) > 0
     won      = (perf.get("team") == common.get("winner_team"))
 
-    # Erweiterte Metriken
-    spots            = perf.get("spotted_enemies", 0)
+    # Korrigierte Feldnamen für erweiterte Metriken
+    spots            = perf.get("spotted", 0)               # statt spotted_enemies :contentReference[oaicite:2]{index=2}
     damage_received  = perf.get("damage_received", 0)
     assisted_radio   = perf.get("damage_assisted_radio", 0)
     assisted_track   = perf.get("damage_assisted_track", 0)
     shots            = perf.get("shots", 0)
-    hits             = perf.get("hits", 0)
+    hits             = perf.get("direct_hits", 0)           # statt hits :contentReference[oaicite:3]{index=3}
     capture_points   = perf.get("capture_points", 0)
 
     return {
         # Basis
-        "damage_per_minute":        round(damage / duration_min, 2) if duration_min > 0 else 0,
-        "kills_per_minute":         round(kills / duration_min, 3) if duration_min > 0 else 0,
-        "survived":                 int(not died),
-        "won_match":                int(won),
+        "damage_per_minute":         round(damage / duration_min, 2) if duration_min > 0 else 0,
+        "kills_per_minute":          round(kills / duration_min, 3) if duration_min > 0 else 0,
+        "survived":                  int(not died),
+        "won_match":                 int(won),
 
         # Erweiterung
-        "spots_per_minute":         round(spots / duration_min, 3) if duration_min > 0 else 0,
-        "damage_received_per_minute": round(damage_received / duration_min, 2) if duration_min > 0 else 0,
-        "assist_damage_per_minute": round((assisted_radio + assisted_track) / duration_min, 2) if duration_min > 0 else 0,
-        "hit_ratio_percent":        round((hits / shots * 100), 1) if shots > 0 else 0,
+        "spots_per_minute":          round(spots / duration_min, 3) if duration_min > 0 else 0,
+        "damage_received_per_minute":round(damage_received / duration_min, 2) if duration_min > 0 else 0,
+        "assist_damage_per_minute":  round((assisted_radio + assisted_track) / duration_min, 2) if duration_min > 0 else 0,
+        "hit_ratio_percent":         round((hits / shots * 100), 1) if shots > 0 else 0,
         "capture_points_per_minute": round(capture_points / duration_min, 2) if duration_min > 0 else 0
     }
 
@@ -52,7 +52,7 @@ def main():
 
     metrics = compute_metrics(data)
 
-    # Ausgeben
+    # Ausgabe
     for key, value in metrics.items():
         print(f"{key}: {value}")
 
