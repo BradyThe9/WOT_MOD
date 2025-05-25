@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "WoT Replay Data Schema",
+    "type": "object",
+    "required": [
+      "battle_metadata",
+      "battle_performance",
+      "common",
+      "battle_frags",
+      "battle_economy",
+      "battle_xp"
+    ],
+    "properties": {
+      "battle_metadata": {
+        "type": "array",
+        "description": "Metadaten zur Runde",
+        "items": { "type": "object" }
+      },
+      "battle_performance": {
+        "type": "array",
+        "description": "Leistungskennzahlen der Runde",
+        "items": { "type": "object" }
+      },
+      "common": {
+        "type": "array",
+        "description": "Allgemeine Daten (Player, Fahrzeug, Karte)",
+        "items": { "type": "object" }
+      },
+      "battle_frags": {
+        "type": "array",
+        "description": "Liste aller Abschüsse und Team-Stats",
+        "items": { "type": "object" }
+      },
+      "battle_economy": {
+        "type": "array",
+        "description": "Wirtschafts-Daten (Credits, Kosten, Einnahmen)",
+        "items": { "type": "object" }
+      },
+      "battle_xp": {
+        "type": "array",
+        "description": "Erfahrungs-Punkte-Daten",
+        "items": { "type": "object" }
+      }
+    },
+    "additionalProperties": false
+  }

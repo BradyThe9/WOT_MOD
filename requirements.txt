@@ -1,0 +1,5 @@
+# Für Replay-Parsing
+wotreplay==1.0.2
+
+# Für JSON-Schema-Validation
+jsonschema==4.18.4
